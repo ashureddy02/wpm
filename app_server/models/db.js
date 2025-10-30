@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const dbURI = 'mongodb://localhost/Loc8r';
+const dbURI = 'mongodb+srv://ashu_user:ashritha216@cluster0.uo0gini.mongodb.net/Loc8r?appName=Cluster0';
 mongoose.connect(dbURI, { useNewUrlParser: true });
 
 // CONNECTION EVENTS
