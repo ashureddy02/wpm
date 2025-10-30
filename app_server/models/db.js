@@ -1,21 +1,22 @@
 const mongoose = require('mongoose');
 
-const dbURI = 'mongodb+srv://ashu_user:ashritha216@cluster0.uo0gini.mongodb.net/Loc8r?appName=Cluster0';
-mongoose.connect(dbURI, { useNewUrlParser: true });
+const dbURI =
+  process.env.MONGO_URI ||
+  'mongodb://127.0.0.1:27017/Loc8r';
 
-// CONNECTION EVENTS
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true });
+
 mongoose.connection.on('connected', () => {
-  console.log(`Mongoose connected to ${dbURI}`);
+  console.log(`✅ Mongoose connected to ${dbURI}`);
 });
 
 mongoose.connection.on('error', err => {
-  console.log(`Mongoose connection error: ${err}`);
+  console.log(`❌ Mongoose connection error: ${err}`);
 });
 
 mongoose.connection.on('disconnected', () => {
-  console.log('Mongoose disconnected');
+  console.log('⚠️ Mongoose disconnected');
 });
-
 // GRACEFUL SHUTDOWN
 const gracefulShutdown = (msg, callback) => {
   mongoose.connection.close(() => {
