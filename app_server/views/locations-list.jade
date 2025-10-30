@@ -1,0 +1,31 @@
+extends layout
+block content
+  .row.banner
+    .col-12
+      h1= pageHeader.title
+      if pageHeader.strapline
+        small &nbsp; #{pageHeader.strapline}
+  .row
+    .col-12.col-md-8
+      if locations.length
+        each location in locations
+          .card
+            .card-block
+              h4
+                a(href="/location")= location.name
+                small &nbsp;
+                  - var fullStars = location.rating || 0;
+                  - var emptyStars = 5 - fullStars;
+                  each _ in [].constructor(fullStars)
+                    i.fas.fa-star
+                  each _ in [].constructor(emptyStars)
+                    i.far.fa-star
+              span.badge.badge-pill.badge-default.float-right= location.distance
+              p.address= location.address
+              p.facilities
+                each facility in location.facilities
+                  span.badge.badge-warning= facility
+      else
+        p No locations found.
+    .col-12.col-md-4
+      p.lead= sidebar
